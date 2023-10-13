@@ -33,6 +33,7 @@ pub struct App {
 }
 
 impl App {
+    /// Create a new graphical application using opengl
     pub fn new(game_state: GameState) -> App {
         // Change this to OpenGL::V2_1 if not working.
         let opengl = OpenGL::V3_2;
@@ -53,6 +54,7 @@ impl App {
         }
     }
 
+    /// Render the game state
     fn render(&mut self, args: &RenderArgs) {
         use graphics::*;
 
@@ -67,6 +69,8 @@ impl App {
                     false => BLACK,
                 };
                 cells.push(Cell { x, y, color });
+
+                // We may also ignore dead cells as the background is already black...
             }
         }
 
@@ -85,12 +89,13 @@ impl App {
         });
     }
 
-    // Updates the game state
+    /// Updates the game state
     fn update(&mut self, args: &UpdateArgs) {
         self.game_state.forward_one_step();
         self.update_time = time::Instant::now();
     }
 
+    /// Run the application
     pub fn run(&mut self) {
         let mut events = Events::new(EventSettings::new());
         while let Some(e) = events.next(&mut self.window) {

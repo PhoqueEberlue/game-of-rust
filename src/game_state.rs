@@ -153,6 +153,10 @@ impl GameState {
     pub fn get_matrix(&self) -> &Vec<Vec<bool>>{
         &self.matrix
     }
+
+    pub fn get_mut_matrix(&mut self) -> &mut Vec<Vec<bool>>{
+        &mut self.matrix
+    }
 }
 
 // Implementing display trait for the structure GameState
